@@ -1,0 +1,31 @@
+import json
+# supondo que o arquivo contendo o faturamento diario da distribuidora esteja nomeado como "faturamento.json"
+with open("faturamento.json") as arquivo:
+    faturamento = json.load(arquivo)
+    
+    
+soma_faturamento = 0
+quantidade_dias = 0
+menor_faturamento = float('inf')
+maior_faturamento = float('-inf')
+
+for valor in faturamento:
+    if valor > 0:
+        soma_faturamento += valor
+        quantidade_dias += 1
+        if valor < menor_faturamento:
+            menor_faturamento = valor
+        if valor > maior_faturamento:
+            maior_faturamento = valor
+
+media_mensal = soma_faturamento / quantidade_dias
+
+dias_acima_media = 0
+
+for valor in faturamento:
+    if valor > media_mensal:
+        dias_acima_media += 1
+        
+print("Menor faturamento: R$ {:.2f}".format(menor_faturamento))
+print("Maior faturamento: R$ {:.2f}".format(maior_faturamento))
+print("Número de dias acima da média: {}".format(dias_acima_media))
